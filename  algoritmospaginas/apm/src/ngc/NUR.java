@@ -25,6 +25,10 @@ public class NUR extends Alocacao {
 			if(existe(elemento)) {
 				setAcertos(getAcertos()+1);
 				elemento.setR(true);
+				PaginaRequisitada p = consultar(elemento.getNumero());
+				if(!p.getM() && elemento.getM()) {
+					p.setM(true);
+				}
 			} else {
 				setFalhas(getFalhas()+1);
 				elemento.setR(true);
