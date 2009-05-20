@@ -12,8 +12,28 @@ public class PaginaRequisitada {
 	public PaginaRequisitada(int numero, String caractere) {
 		this.numero = numero;
 		this.caractere = caractere;
+		if(this.caractere.equalsIgnoreCase("w")) {
+			this.m = true;
+		} else if (caractere.equalsIgnoreCase("r")) {
+			this.m = false;
+		}
 		this.r = false;
 	}
+	
+	public int getClasse() {
+		int retorno = -1;
+		if((this.getR()) && (this.getM())) {
+			retorno = 4;
+		} else if((this.getR()) && (!this.getM()) ) {
+			retorno = 3;
+		} else if((!this.getR()) && (this.getM())) {
+			retorno = 2;
+		} else if((!this.getR()) && (!this.getM())) {
+			retorno = 1;
+		}
+		return retorno;
+	}
+	
 	public boolean getM() {
 		return m;
 	}
