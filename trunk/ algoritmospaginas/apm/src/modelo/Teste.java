@@ -1,5 +1,7 @@
 package modelo;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Vector;
 
 import ngc.*;
@@ -9,29 +11,27 @@ public class Teste {
 		
 		Vector<PaginaRequisitada> pilha = new Vector<PaginaRequisitada>();
 		
-		pilha.add(new PaginaRequisitada(6,"w"));
-		pilha.add(new PaginaRequisitada(7,"w"));
-		pilha.add(new PaginaRequisitada(5,"w"));
-		pilha.add(new PaginaRequisitada(5,"r"));
-		pilha.add(new PaginaRequisitada(0,"r"));
-		pilha.add(new PaginaRequisitada(3,"r"));
-		pilha.add(new PaginaRequisitada(3,"r"));
-		pilha.add(new PaginaRequisitada(0,"r"));
-		pilha.add(new PaginaRequisitada(6,"r"));
-		pilha.add(new PaginaRequisitada(0,"r"));
-		pilha.add(new PaginaRequisitada(4,"r"));
-		pilha.add(new PaginaRequisitada(1,"r"));
-		pilha.add(new PaginaRequisitada(3,"r"));
-		pilha.add(new PaginaRequisitada(6,"r"));
-		pilha.add(new PaginaRequisitada(3,"r"));
-		pilha.add(new PaginaRequisitada(7,"r"));
-		pilha.add(new PaginaRequisitada(4,"r"));
-		pilha.add(new PaginaRequisitada(5,"r"));
-		pilha.add(new PaginaRequisitada(7,"r"));
-		pilha.add(new PaginaRequisitada(4,"r"));
 		
+		Referencia r = null;
+		try {
+			r = new Referencia("c:/REFERENCIAS_10000.txt");
+			int size = r.getListCaract().size();
+			
+			for (int i =0;i<size; i++){
+				pilha.add(new PaginaRequisitada(r.getListNum().get(i),r.getListCaract().get(i)));
+			}
+			
+		}catch (FileNotFoundException e) {
+			System.out.println(e.getMessage());
+		
+		
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			
+			e.printStackTrace();
+		}
 	
-		Alocacao m = new MRU(4);
+		Alocacao m = new SegundaChance(4);
 		
 		for(PaginaRequisitada p : pilha) {
 			m.inserir(p);
