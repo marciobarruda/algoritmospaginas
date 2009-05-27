@@ -3,10 +3,16 @@ package gui;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.swing.JFileChooser;
 import javax.swing.UIManager;
+
+/*
+ * Main.java
+ *
+ * Created on 27 de Maio de 2009, 00:19
+ */
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 
@@ -89,6 +95,8 @@ public class Main extends javax.swing.JFrame {
         bitR = new javax.swing.JSpinner();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jTextDiretorio = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
         jPanelSainda1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         dadoSaida = new javax.swing.JTable();
@@ -97,12 +105,13 @@ public class Main extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SO - 2NP");
+        setAlwaysOnTop(true);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18));
         jLabel1.setText("DADOS DE ENTRADA");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel3.setText("Quantidade de frames da memória real");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -116,7 +125,7 @@ public class Main extends javax.swing.JFrame {
 
         bitR.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
 
-        jButton1.setText("Arquivo");
+        jButton1.setText("Procurar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -130,14 +139,22 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setText("Arquivo:");
+
         javax.swing.GroupLayout jPanelEntradaLayout = new javax.swing.GroupLayout(jPanelEntrada);
         jPanelEntrada.setLayout(jPanelEntradaLayout);
         jPanelEntradaLayout.setHorizontalGroup(
             jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEntradaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1)
+                    .addComponent(jButton2)
+                    .addGroup(jPanelEntradaLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bitR, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelEntradaLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(10, 10, 10)
@@ -145,12 +162,12 @@ public class Main extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(frameMax, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelEntradaLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bitR, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(5, Short.MAX_VALUE))
+                        .addComponent(jTextDiretorio, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelEntradaLayout.setVerticalGroup(
             jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,15 +176,18 @@ public class Main extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(frameMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(frameMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(frameMin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(frameMax, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addGroup(jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
                     .addComponent(bitR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(45, 45, 45)
-                .addComponent(jButton1)
-                .addGap(79, 79, 79)
+                .addGap(50, 50, 50)
+                .addGroup(jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jTextDiretorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addGap(74, 74, 74)
                 .addComponent(jButton2)
                 .addContainerGap(97, Short.MAX_VALUE))
         );
@@ -197,7 +217,7 @@ public class Main extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(dadoSaida);
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18));
         jLabel2.setText("QUANTIDADE DE ACERTOS");
 
         javax.swing.GroupLayout jPanelSainda1Layout = new javax.swing.GroupLayout(jPanelSainda1);
@@ -247,6 +267,7 @@ public class Main extends javax.swing.JFrame {
 private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 // TODO add your handling code here:
     fileChooser.showOpenDialog(jButton1);
+    jTextDiretorio.setText(fileChooser.getSelectedFile().getAbsolutePath());
     System.out.print(fileChooser.getSelectedFile().getAbsolutePath());
 }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -276,10 +297,12 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelEntrada;
     private javax.swing.JPanel jPanelSainda1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextDiretorio;
     // End of variables declaration//GEN-END:variables
 
 }
