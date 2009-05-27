@@ -1,15 +1,14 @@
 package ngc;
 
-import java.io.FileNotFoundException;
+import gui.Main;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
-import javax.swing.JOptionPane;
-
 import modelo.PaginaRequisitada;
 import modelo.Referencia;
-import gui.Main;
 
 public class Controle {
 	private String urlFile;
@@ -42,61 +41,116 @@ public class Controle {
 	
 	public void calcular(){
 		List<Integer> list = null;
+		int count = 0;
+		
 		for(int i = frameMin; i <= frameMax; i++){
-			list = new Vector<Integer>();
+			list = new ArrayList<Integer>(7);
 			list.add(i);
 			//Inicio - Segunda Chance
 			m = new SegundaChance(i);
 			
+			count = 0;
 			for(PaginaRequisitada p : pilha) {
+				count++;
+				if(count == bitR) {
+					Vector<PaginaRequisitada> b = m.getPilha();
+					for(PaginaRequisitada pagina : b) {
+						pagina.setR(false);
+					}
+				}
 				m.inserir(p);
 			}
-			System.out.println("=-=-=-=-=-=-=Segunda Chance=-=-=-=-=-=-=");
-			System.out.println("Quantidade de Frames: "+i+"\n");
-			System.out.println("Acertos: "+m.getAcertos());
-			System.out.println("Falhas: "+m.getFalhas());
-			System.out.println("Porcetagem: "+m.getPorcentagem()*100+"%\n");
 			list.add(m.getAcertos());
 			//Fim - Segunda Chance
 			
 			//Inicio - NUR
 			
-			list.add(-1);
+			m = new NUR(i);
+			count = 0;
+			for(PaginaRequisitada p : pilha) {
+				count++;
+				if(count == bitR) {
+					Vector<PaginaRequisitada> b = m.getPilha();
+					for(PaginaRequisitada pagina : b) {
+						pagina.setR(false);
+					}
+				}
+				m.inserir(p);
+			}
+			list.add(m.getAcertos());
 			
 			//Fim - NUR
 			
 						
 			//Inicio - MRU
 			m = new MRU(i);
-			
+			count = 0;
 			for(PaginaRequisitada p : pilha) {
+				count++;
+				if(count == bitR) {
+					Vector<PaginaRequisitada> b = m.getPilha();
+					for(PaginaRequisitada pagina : b) {
+						pagina.setR(false);
+					}
+				}
 				m.inserir(p);
 			}
-			System.out.println("=-=-=-=-=-=-=MRU=-=-=-=-=-=-=");
-			System.out.println("Quantidade de Frames: "+i+"\n");
-			System.out.println("Acertos: "+m.getAcertos());
-			System.out.println("Falhas: "+m.getFalhas());
-			System.out.println("Porcetagem: "+m.getPorcentagem()*100+"%");
-			System.out.println();
 			list.add(m.getAcertos());
 			//Fim - MUR
 			
 			
 			//Inicio - RAND
 			
-			list.add(-1);
+			m = new Rand(i);
+			count = 0;
+			for(PaginaRequisitada p : pilha) {
+				count++;
+				if(count == bitR) {
+					Vector<PaginaRequisitada> b = m.getPilha();
+					for(PaginaRequisitada pagina : b) {
+						pagina.setR(false);
+					}
+				}
+				m.inserir(p);
+			}
+			list.add(m.getAcertos());
 			
 			//Fim - RAND
 			
 			//Inicio - MFU
 			
-			list.add(-1);
+			m = new MFU(i);
+			count = 0;
+			for(PaginaRequisitada p : pilha) {
+				count++;
+				if(count == bitR) {
+					Vector<PaginaRequisitada> b = m.getPilha();
+					for(PaginaRequisitada pagina : b) {
+						pagina.setR(false);
+					}
+				}
+				m.inserir(p);
+			}
+			list.add(m.getAcertos());
 			
 			//Fim - MFU
 			
 			//Inicio - OTIMO
 			
-			list.add(-1);
+			m = new Otimo(i);
+			count = 0;
+			for(PaginaRequisitada p : pilha) {
+				count++;
+				if(count == bitR) {
+					Vector<PaginaRequisitada> b = m.getPilha();
+					for(PaginaRequisitada pagina : b) {
+						pagina.setR(false);
+					}
+				}
+				m.inserir(p);
+			}
+			((Otimo)m).calcular();
+			list.add(m.getAcertos());
 			
 			//Fim - OTIMO
 		
