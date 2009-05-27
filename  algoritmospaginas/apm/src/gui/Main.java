@@ -204,7 +204,7 @@ public class Main extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Quantidade de Frames", "Segunda Chance", "NUR", "MRU", "RAND", "MFU", "Ã“TIMO"
+                "Frames", "Segunda Chance", "NUR", "MRU", "RAND", "MFU", "ÓTIMO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
