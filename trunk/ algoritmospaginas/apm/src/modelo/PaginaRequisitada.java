@@ -1,14 +1,13 @@
 package modelo;
 
 public class PaginaRequisitada {
+	
 	private String caractere;
 	private int numero;
 	private boolean r;
 	private boolean m;
-	
-	public PaginaRequisitada() {
-		
-	}
+	private int contador;
+
 	public PaginaRequisitada(int numero, String caractere) {
 		this.numero = numero;
 		this.caractere = caractere;
@@ -18,6 +17,24 @@ public class PaginaRequisitada {
 			this.m = false;
 		}
 		this.r = false;
+		this.contador = 0;
+	}
+	
+	public void incrementa() {
+		this.contador++;
+	}
+	public void zera() {
+		this.contador = 0;
+	}
+	
+	public int getContador() {
+		return contador;
+	}
+	public void setContador(int contador) {
+		this.contador = contador;
+	}
+	public PaginaRequisitada() {
+		
 	}
 	
 	public int getClasse() {
@@ -58,7 +75,5 @@ public class PaginaRequisitada {
 	public void setNumero(int numero) {
 		this.numero = numero;
 	}
-	
-	
-	
+
 }

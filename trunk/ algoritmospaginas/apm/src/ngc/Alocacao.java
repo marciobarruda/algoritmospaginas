@@ -17,6 +17,28 @@ public abstract class Alocacao {
 		this.pilha = new Vector<PaginaRequisitada>();
 	}
 	
+	public PaginaRequisitada menorContador() {
+		PaginaRequisitada retorno = getPilha().get(0);
+		for(int i = 0; i< this.pilha.size(); i++ ) {
+			PaginaRequisitada p = this.pilha.get(i);
+			if(p.getContador() < retorno.getContador()) {
+				retorno = p;
+			}
+		}
+		return retorno;
+	}
+	
+	public PaginaRequisitada maiorContador() {
+		PaginaRequisitada retorno = getPilha().get(0);
+		for(int i = 0; i< this.pilha.size(); i++ ) {
+			PaginaRequisitada p = this.pilha.get(i);
+			if(p.getContador() > retorno.getContador()) {
+				retorno = p;
+			}
+		}
+		return retorno;
+	}
+	
 	public int getTam() {
 		return this.tam;
 	}
