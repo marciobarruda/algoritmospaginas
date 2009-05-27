@@ -1,9 +1,14 @@
 package gui;
 
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /*
@@ -14,6 +19,12 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+
+import com.sun.xml.internal.ws.util.StringUtils;
+
+import excecoes.Custom;
+
+import ngc.Controle;
 
 
 
@@ -34,7 +45,7 @@ public class Main extends javax.swing.JFrame {
     
     
     /** Creates new form Main */
-    public Main() {
+    private Main() {
         try {
             initComponents();
             this.setSize(1020, 700);
@@ -45,7 +56,10 @@ public class Main extends javax.swing.JFrame {
              model.getColumn(0).setPreferredWidth(65);
              model.getColumn(1).setPreferredWidth(120);
              model.getColumn(2).setPreferredWidth(120);
-             model.getColumn(3).setPreferredWidth(270);
+             model.getColumn(3).setPreferredWidth(120);
+             model.getColumn(4).setPreferredWidth(120);
+             model.getColumn(5).setPreferredWidth(120);
+             jTextDiretorio.setText("");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
@@ -57,19 +71,19 @@ public class Main extends javax.swing.JFrame {
         }
     }
 
-   /* public void addDadoSaida(List<Carro> carros) {
+    public void addDadoSaida(List<Integer> list) {
         DefaultTableModel row = (DefaultTableModel) dadoSaida.getModel();
-        for (int i = 0; i < carros.size(); i++) {
             Vector v = new Vector(4);
-            v.add(carros.get(i).getIdentificador());
-            v.add(carros.get(i).getTempoTravessia());
-            v.add(carros.get(i).getTempoPermanencia());
-            v.add(carros.get(i).getStatus());
+            v.add(list.get(0));
+            v.add(list.get(1));
+            v.add(list.get(2));
+            v.add(list.get(3));
+            v.add(list.get(4));
+            v.add(list.get(5));
             row.addRow(v);
-        }
-    }
+    } 
 
-    public void updateDado(CarroL carro) {
+   /* public void addTable(List<Integer> list) {
         DefaultTableModel row = (DefaultTableModel) dadoSaida.getModel();
         row.setValueAt(carro.getStatus(), Integer.parseInt(carro.getIdentificador()) - 1, 3);
     } */
@@ -112,7 +126,7 @@ public class Main extends javax.swing.JFrame {
         jLabel1.setText("DADOS DE ENTRADA");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14));
-        jLabel3.setText("Quantidade de frames da memÃ³ria real");
+        jLabel3.setText("Quantidade de frames da memória real");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Intervalo de tempo zera R:");
@@ -197,10 +211,6 @@ public class Main extends javax.swing.JFrame {
 
         dadoSaida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
             new String [] {
@@ -269,12 +279,35 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     fileChooser.showOpenDialog(jButton1);
     jTextDiretorio.setText(fileChooser.getSelectedFile().getAbsolutePath());
     System.out.print(fileChooser.getSelectedFile().getAbsolutePath());
-}//GEN-LAST:event_jButton1ActionPerformed
+}
 
 private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 // TODO add your handling code here:
-}//GEN-LAST:event_jButton2ActionPerformed
-
+	this.singleton = this;
+	try {
+		validaUrlFile();
+		new Controle().calcular();
+	}catch (FileNotFoundException e) {
+		JOptionPane.showMessageDialog(this, e.getMessage());
+		System.out.println(e.getMessage());
+	} catch (IOException e) {
+		JOptionPane.showMessageDialog(this, e.getMessage());
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 catch (Custom e) {
+		// TODO Auto-generated catch block
+		JOptionPane.showMessageDialog(this, e.getMessage());
+		e.printStackTrace();
+	}
+	
+}
+public void validaUrlFile() throws Custom{
+	if ((this.jTextDiretorio.getText() == null) || (this.jTextDiretorio.getText() == "") ){
+		throw new Custom("Arquivo Obrigatório");
+	}
+		
+}
     /**
     * @param args the command line arguments
     */
@@ -305,4 +338,44 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private javax.swing.JTextField jTextDiretorio;
     // End of variables declaration//GEN-END:variables
 
+
+	public javax.swing.JSpinner getBitR() {
+		return bitR;
+	}
+
+
+	public void setBitR(javax.swing.JSpinner bitR) {
+		this.bitR = bitR;
+	}
+
+
+	public javax.swing.JSpinner getFrameMax() {
+		return frameMax;
+	}
+
+
+	public void setFrameMax(javax.swing.JSpinner frameMax) {
+		this.frameMax = frameMax;
+	}
+
+
+	public javax.swing.JSpinner getFrameMin() {
+		return frameMin;
+	}
+
+
+	public void setFrameMin(javax.swing.JSpinner frameMin) {
+		this.frameMin = frameMin;
+	}
+
+
+	public javax.swing.JTextField getJTextDiretorio() {
+		return jTextDiretorio;
+	}
+
+
+	public void setJTextDiretorio(javax.swing.JTextField textDiretorio) {
+		jTextDiretorio = textDiretorio;
+	}
+    
 }
