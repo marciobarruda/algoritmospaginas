@@ -80,6 +80,7 @@ public class Main extends javax.swing.JFrame {
             v.add(list.get(3));
             v.add(list.get(4));
             v.add(list.get(5));
+            v.add(list.get(6));
             row.addRow(v);
     } 
 

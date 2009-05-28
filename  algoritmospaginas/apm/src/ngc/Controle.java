@@ -56,6 +56,7 @@ public class Controle {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
+						count = 0;
 					}
 				}
 				m.inserir(p);
@@ -73,6 +74,7 @@ public class Controle {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
+						count = 0;
 					}
 				}
 				m.inserir(p);
@@ -91,6 +93,7 @@ public class Controle {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
+						count = 0;
 					}
 				}
 				m.inserir(p);
@@ -109,6 +112,7 @@ public class Controle {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
+						count = 0;
 					}
 				}
 				m.inserir(p);
@@ -127,6 +131,7 @@ public class Controle {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
+						count = 0;
 					}
 				}
 				m.inserir(p);
@@ -145,6 +150,7 @@ public class Controle {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
+						count = 0;
 					}
 				}
 				m.inserir(p);
