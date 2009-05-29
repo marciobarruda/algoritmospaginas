@@ -1,78 +1,53 @@
 package modelo;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
-import java.util.Vector;
-
-import javax.swing.JOptionPane;
+import java.util.*;
 
 import ngc.*;
 
 public class Teste {
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
+		Vector<PaginaRequisitada> vetor = new Vector<PaginaRequisitada>();
+		vetor.add(new PaginaRequisitada(0,"r"));
+		vetor.add(new PaginaRequisitada(1,"w"));
+		vetor.add(new PaginaRequisitada(0,"w"));
+		vetor.add(new PaginaRequisitada(3,"r"));
+		vetor.add(new PaginaRequisitada(1,"r"));
+		vetor.add(new PaginaRequisitada(5,"w"));
+		vetor.add(new PaginaRequisitada(2,"r"));
+		vetor.add(new PaginaRequisitada(7,"r"));
 		
-		Vector<PaginaRequisitada> pilha = new Vector<PaginaRequisitada>();
+		vetor.add(new PaginaRequisitada(5,"r"));
+		vetor.add(new PaginaRequisitada(2,"r"));
+		vetor.add(new PaginaRequisitada(4,"r"));
+		vetor.add(new PaginaRequisitada(2,"w"));
+		vetor.add(new PaginaRequisitada(6,"r"));
+		vetor.add(new PaginaRequisitada(0,"r"));
 		
-		
-		Referencia referencia = null;
-		try {
-			referencia = new Referencia("c:/Nova pasta/REFERENCIAS_20.txt");
-			int size = referencia.getListCaract().size();
-			
-			for (int i =0;i<size; i++){
-				pilha.add(new PaginaRequisitada(referencia.getListNum().get(i),referencia.getListCaract().get(i)));
+		for(int k = 4; k <= 8; k++) {
+			Alocacao a = new MFU(k);
+			int count = 0;
+			for(PaginaRequisitada p : vetor) {
+				count++;
+				if(count == 9) {
+					Vector<PaginaRequisitada> paginas = a.getPilha();
+					for( PaginaRequisitada pag : paginas) {
+						pag.setR(false);
+					}
+					count = 0;
+				}
+				a.inserir(p);
 			}
 			
-			Scanner s = new Scanner(System.in);
-			System.out.println("-----Informe a quantidade de Frames-----");
-			System.out.println("Quantidade minina: ");
-			int min = s.nextInt();
-			System.out.println("Quantidade máxima: ");
-			int max = s.nextInt();
-			for(int i = min; i <= max; i++){
-				
-				Alocacao m = new MRU(i);
-				
-				for(PaginaRequisitada p : pilha) {
-					m.inserir(p);
-				}
-				System.out.println("=-=-=-=-=-=-=MRU=-=-=-=-=-=-=");
-				System.out.println("Quantidade de Frames: "+i+"\n");
-				System.out.println("Acertos: "+m.getAcertos());
-				System.out.println("Falhas: "+m.getFalhas());
-				System.out.println("Porcetagem: "+m.getPorcentagem()*100+"%");
-				System.out.println();
-				
-				
-				m = new SegundaChance(i);
-				
-				for(PaginaRequisitada p : pilha) {
-					m.inserir(p);
-				}
-				System.out.println("=-=-=-=-=-=-=Segunda Chance=-=-=-=-=-=-=");
-				System.out.println("Quantidade de Frames: "+i+"\n");
-				System.out.println("Acertos: "+m.getAcertos());
-				System.out.println("Falhas: "+m.getFalhas());
-				System.out.println("Porcetagem: "+m.getPorcentagem()*100+"%\n");
-			
+			if(a instanceof Otimo) {
+				((Otimo) a).calcular();
 			}
+			System.out.println("Acertos: "+a.getAcertos());
+			System.out.println("Falhas: "+a.getFalhas());
+			System.out.println("Porcentagem: "+a.getPorcentagem());
+			System.out.println("-------------------------------------");
 			
-			
-			
-			
-			
-		}catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
-			System.out.println(e.getMessage());
+
+		}		
 		
-		
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			
-			e.printStackTrace();
-		}
-		
-	
-	}*/
+	}
 }
