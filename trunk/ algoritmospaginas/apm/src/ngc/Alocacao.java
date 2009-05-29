@@ -29,11 +29,10 @@ public abstract class Alocacao {
 	}
 	
 	public PaginaRequisitada maiorContador() {
-		PaginaRequisitada retorno = getPilha().get(0);
+		PaginaRequisitada retorno = this.pilha.get(0);
 		for(int i = 0; i< this.pilha.size(); i++ ) {
-			PaginaRequisitada p = this.pilha.get(i);
-			if(p.getContador() > retorno.getContador()) {
-				retorno = p;
+			if(this.pilha.get(i).getContador() > retorno.getContador()) {
+				retorno = this.pilha.get(i);
 			}
 		}
 		return retorno;

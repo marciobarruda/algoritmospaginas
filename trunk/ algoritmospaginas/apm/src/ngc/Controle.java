@@ -11,6 +11,7 @@ import modelo.PaginaRequisitada;
 import modelo.Referencia;
 
 public class Controle {
+	
 	private String urlFile;
 	private int frameMin;
 	private int frameMax;
@@ -41,10 +42,13 @@ public class Controle {
 	
 	public void calcular(){
 		List<Integer> list = null;
-		int count = 0;
-		
+		int count;
+		Vector<PaginaRequisitada> teste = new Vector<PaginaRequisitada>();
+		for(PaginaRequisitada p:pilha) {
+			teste.add(p);
+		}
 		for(int i = frameMin; i <= frameMax; i++){
-			list = new ArrayList<Integer>(7);
+			list = new ArrayList<Integer>();
 			list.add(i);
 			//Inicio - Segunda Chance
 			m = new SegundaChance(i);
@@ -52,16 +56,17 @@ public class Controle {
 			count = 0;
 			for(PaginaRequisitada p : pilha) {
 				count++;
-				if(count == bitR) {
+				if(count == bitR + 1) {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
-						count = 0;
 					}
+					count = 0;
 				}
 				m.inserir(p);
 			}
 			list.add(m.getAcertos());
+			
 			//Fim - Segunda Chance
 			
 			//Inicio - NUR
@@ -70,35 +75,36 @@ public class Controle {
 			count = 0;
 			for(PaginaRequisitada p : pilha) {
 				count++;
-				if(count == bitR) {
+				if(count == bitR + 1) {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
-						count = 0;
 					}
+					count = 0;
 				}
 				m.inserir(p);
 			}
 			list.add(m.getAcertos());
 			
+			
 			//Fim - NUR
 			
-						
 			//Inicio - MRU
 			m = new MRU(i);
 			count = 0;
 			for(PaginaRequisitada p : pilha) {
 				count++;
-				if(count == bitR) {
+				if(count == bitR + 1) {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
-						count = 0;
 					}
+					count = 0;
 				}
 				m.inserir(p);
 			}
 			list.add(m.getAcertos());
+			
 			//Fim - MUR
 			
 			
@@ -108,35 +114,27 @@ public class Controle {
 			count = 0;
 			for(PaginaRequisitada p : pilha) {
 				count++;
-				if(count == bitR) {
+				if(count == bitR + 1) {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
-						count = 0;
 					}
+					count = 0;
 				}
 				m.inserir(p);
 			}
 			list.add(m.getAcertos());
+			
 			
 			//Fim - RAND
 			
 			//Inicio - MFU
 			
-			m = new MFU(i);
-			count = 0;
-			for(PaginaRequisitada p : pilha) {
-				count++;
-				if(count == bitR) {
-					Vector<PaginaRequisitada> b = m.getPilha();
-					for(PaginaRequisitada pagina : b) {
-						pagina.setR(false);
-						count = 0;
-					}
-				}
-				m.inserir(p);
+			Alocacao x = new MFU(i);
+			for(PaginaRequisitada p : teste) {
+				x.inserir(p);
 			}
-			list.add(m.getAcertos());
+			list.add(x.getAcertos());
 			
 			//Fim - MFU
 			
@@ -146,12 +144,12 @@ public class Controle {
 			count = 0;
 			for(PaginaRequisitada p : pilha) {
 				count++;
-				if(count == bitR) {
+				if(count == bitR + 1) {
 					Vector<PaginaRequisitada> b = m.getPilha();
 					for(PaginaRequisitada pagina : b) {
 						pagina.setR(false);
-						count = 0;
 					}
+					count = 0;
 				}
 				m.inserir(p);
 			}

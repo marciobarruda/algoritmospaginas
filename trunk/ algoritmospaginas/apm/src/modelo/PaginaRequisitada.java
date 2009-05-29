@@ -13,7 +13,7 @@ public class PaginaRequisitada {
 		this.caractere = caractere;
 		if(this.caractere.equalsIgnoreCase("w")) {
 			this.m = true;
-		} else if (caractere.equalsIgnoreCase("r")) {
+		} else if (this.caractere.equalsIgnoreCase("r")) {
 			this.m = false;
 		}
 		this.r = false;
