@@ -27,13 +27,12 @@ public class Otimo extends Alocacao {
 					setAcertos(getAcertos() + 1);
 				} else {
 					Vector<PaginaRequisitada> aux = a;
-					for(PaginaRequisitada p : getPilha()) {
-						for(PaginaRequisitada pAux : aux) {
-							if(pAux.getNumero() != p.getNumero()) {
-								p.incrementa();
-							} else {
+					for(int i = 0; i < getPilha().size();i++) {
+						for(int j = 0;j < aux.size(); j++ ) {
+							if(aux.get(j).getNumero() == getPilha().get(i).getNumero()) {
 								break;
 							}
+							getPilha().get(i).incrementa();	
 						}
 					}
 					PaginaRequisitada maior = maiorContador();
@@ -44,7 +43,6 @@ public class Otimo extends Alocacao {
 			} else {
 				if(existe(elemento)) {
 					setAcertos(getAcertos() + 1);
-					getPilha().add(elemento);
 				} else {
 					setFalhas(getFalhas()+1);
 					getPilha().add(elemento);

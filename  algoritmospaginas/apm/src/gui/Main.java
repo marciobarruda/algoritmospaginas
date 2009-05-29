@@ -21,7 +21,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-import com.sun.xml.internal.ws.util.StringUtils;
+//import com.sun.xml.internal.ws.util.StringUtils;
 
 import excecoes.Custom;
 
@@ -34,7 +34,11 @@ import ngc.Controle;
  * @author  Frota Júnior
  */
 public class Main extends javax.swing.JFrame {
-    private JFileChooser fileChooser = new JFileChooser();
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JFileChooser fileChooser = new JFileChooser();
     private static Main singleton;
     private JFrame frame = new JFrame();
     
@@ -60,6 +64,7 @@ public class Main extends javax.swing.JFrame {
              model.getColumn(3).setPreferredWidth(120);
              model.getColumn(4).setPreferredWidth(120);
              model.getColumn(5).setPreferredWidth(120);
+             model.getColumn(6).setPreferredWidth(120);
              jTextDiretorio.setText("");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,7 +79,7 @@ public class Main extends javax.swing.JFrame {
 
     public void addDadoSaida(List<Integer> list) {
         DefaultTableModel row = (DefaultTableModel) dadoSaida.getModel();
-            Vector v = new Vector(4);
+            Vector<Integer> v = new Vector<Integer>();
             v.add(list.get(0));
             v.add(list.get(1));
             v.add(list.get(2));
@@ -317,7 +322,11 @@ public void validaUrlFile() throws Custom{
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+            	Main main = new Main();
+            	main.setSize(1010,440);
+            	main.setVisible(true);
+                //new Main().setVisible(true);
+                
             }
         });
     }
