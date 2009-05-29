@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 import ngc.*;
 
 public class Teste {
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		
 		Vector<PaginaRequisitada> pilha = new Vector<PaginaRequisitada>();
 		
@@ -74,5 +74,5 @@ public class Teste {
 		}
 		
 	
-	}
+	}*/
 }

@@ -8,6 +8,7 @@ import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
@@ -35,7 +36,7 @@ import ngc.Controle;
 public class Main extends javax.swing.JFrame {
     private JFileChooser fileChooser = new JFileChooser();
     private static Main singleton;
-    
+    private JFrame frame = new JFrame();
     
     public static Main getInstacia(){
         if (singleton == null)
@@ -116,10 +117,10 @@ public class Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         dadoSaida = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-
+        grafico = new javax.swing.JPanel();
+        grafico.setVisible(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("SO - 2NP");
+        setTitle("SO - 2NP .:: Frota Júnior | Nelson Sandes | Victor Girão");
         setAlwaysOnTop(true);
         getContentPane().setLayout(null);
 
@@ -129,7 +130,7 @@ public class Main extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel3.setText("Quantidade de frames da memória real");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel4.setText("Intervalo de tempo zera R:");
 
         frameMin.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(0), Integer.valueOf(0), null, Integer.valueOf(1)));
@@ -154,7 +155,7 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14));
         jLabel5.setText("Arquivo:");
 
         javax.swing.GroupLayout jPanelEntradaLayout = new javax.swing.GroupLayout(jPanelEntrada);
@@ -163,9 +164,8 @@ public class Main extends javax.swing.JFrame {
             jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEntradaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jButton2)
                     .addGroup(jPanelEntradaLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,7 +181,8 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextDiretorio, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(jButton1))
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelEntradaLayout.setVerticalGroup(
@@ -202,20 +203,20 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jTextDiretorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addGap(74, 74, 74)
+                .addGap(29, 29, 29)
                 .addComponent(jButton2)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelEntrada);
-        jPanelEntrada.setBounds(10, 10, 390, 400);
+        jPanelEntrada.setBounds(10, 10, 390, 300);
 
         dadoSaida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
-                "Frames", "Segunda Chance", "NUR", "MRU", "RAND", "MFU", "ÓTIMO"
+                "Quantidade de Frames", "Segunda Chance", "NUR", "MRU", "RAND", "MFU", "ÓTIMO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -242,7 +243,7 @@ public class Main extends javax.swing.JFrame {
                         .addComponent(jLabel2))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelSainda1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanelSainda1Layout.setVerticalGroup(
@@ -251,38 +252,38 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelSainda1);
         jPanelSainda1.setBounds(410, 10, 590, 400);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout graficoLayout = new javax.swing.GroupLayout(grafico);
+        grafico.setLayout(graficoLayout);
+        graficoLayout.setHorizontalGroup(
+            graficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 990, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 230, Short.MAX_VALUE)
+        graficoLayout.setVerticalGroup(
+            graficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 240, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 420, 990, 230);
+        getContentPane().add(grafico);
+        grafico.setBounds(50, 270, 1300, 500);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 // TODO add your handling code here:
     fileChooser.showOpenDialog(jButton1);
     jTextDiretorio.setText(fileChooser.getSelectedFile().getAbsolutePath());
     System.out.print(fileChooser.getSelectedFile().getAbsolutePath());
 }
 
-private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
 // TODO add your handling code here:
 	this.singleton = this;
 	try {
@@ -303,12 +304,13 @@ private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 	}
 	
 }
+
 public void validaUrlFile() throws Custom{
 	if ((this.jTextDiretorio.getText() == null) || (this.jTextDiretorio.getText() == "") ){
-		throw new Custom("Arquivo Obrigatório");
+		throw new Custom("Arquivo Obrigatï¿½rio");
 	}
 		
-}
+} 
     /**
     * @param args the command line arguments
     */
@@ -325,6 +327,7 @@ public void validaUrlFile() throws Custom{
     private javax.swing.JTable dadoSaida;
     private javax.swing.JSpinner frameMax;
     private javax.swing.JSpinner frameMin;
+    private javax.swing.JPanel grafico;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -332,7 +335,6 @@ public void validaUrlFile() throws Custom{
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelEntrada;
     private javax.swing.JPanel jPanelSainda1;
     private javax.swing.JScrollPane jScrollPane1;
@@ -378,5 +380,25 @@ public void validaUrlFile() throws Custom{
 	public void setJTextDiretorio(javax.swing.JTextField textDiretorio) {
 		jTextDiretorio = textDiretorio;
 	}
-    
+
+
+	public javax.swing.JPanel getJPanel1() {
+		return grafico;
+	}
+
+
+	public void setJPanel1(javax.swing.JPanel panel1) {
+		grafico = panel1;
+	}
+
+
+	public JFrame getFrame() {
+		return frame;
+	}
+
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
+	}
+	
 }
