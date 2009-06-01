@@ -41,11 +41,11 @@ public class PaginaRequisitada {
 		int retorno = -1;
 		if((this.getR()) && (this.getM())) {
 			retorno = 4;
-		} else if((this.getR()) && (!this.getM()) ) {
+		} else if((this.getR() == true) && (this.getM() == false) ) {
 			retorno = 3;
-		} else if((!this.getR()) && (this.getM())) {
+		} else if((this.getR() == false) && (this.getM() == true)) {
 			retorno = 2;
-		} else if((!this.getR()) && (!this.getM())) {
+		} else if((this.getR() == false) && (!this.getM() == false)) {
 			retorno = 1;
 		}
 		return retorno;

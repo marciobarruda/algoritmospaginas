@@ -7,26 +7,19 @@ public class NUR extends Alocacao {
 		super(tam);
 	}
 	
-	public PaginaRequisitada buscaMenorClasse() {
-		PaginaRequisitada retorno = getPilha().get(0);
-		for(PaginaRequisitada p : getPilha()) {
-			if(p.getClasse() < retorno.getClasse()) {
-				retorno = p;
-			}
-		}
-		return retorno;
-	}
+
 
 	@Override
 	public void inserir(PaginaRequisitada elemento) {
+		
 		if(getPilha().size() < getTam()) {
 			if(existe(elemento)) {
 				setAcertos(getAcertos()+1);
-				elemento.setR(true);
 				PaginaRequisitada p = consultar(elemento.getNumero());
 				if(!p.getM() && elemento.getM()) {
 					p.setM(true);
 				}
+				p.setR(true);
 			} else {
 				setFalhas(getFalhas()+1);
 				elemento.setR(true);

@@ -102,4 +102,14 @@ public abstract class Alocacao {
 		return retorno;
 	}
 	
+	public PaginaRequisitada buscaMenorClasse() {
+		PaginaRequisitada retorno = getPilha().get(0);
+		for(PaginaRequisitada p : getPilha()) {
+			if(p.getClasse() < retorno.getClasse()) {
+				retorno = p;
+			}
+		}
+		return retorno;
+	}
+	
 }
